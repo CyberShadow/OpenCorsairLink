@@ -19,7 +19,7 @@
 #include "device.h"
 #include "driver.h"
 #include "lowlevel/platinum.h"
-#include "print.h"
+#include "logic/print.h"
 #include "protocol/platinum.h"
 
 #include <errno.h>
@@ -91,8 +91,8 @@ corsairlink_platinum_firmware_id(
     commands[0x40] = 0xD8; // CRC ??
     // commands[0] = ii; // Length
 
-    rr = dev->driver->write( handle, dev->write_endpoint, commands, 64 );
-    rr = dev->driver->read( handle, dev->read_endpoint, response, 64 );
+    rr = dev->lowlevel->write( handle, dev->write_endpoint, commands, 64 );
+    rr = dev->lowlevel->read( handle, dev->read_endpoint, response, 64 );
 
     snprintf(
         firmware, firmware_size, "%d.%d.%d", ( response[3] & 240 ) >> 4, ( response[3] & 15 ),

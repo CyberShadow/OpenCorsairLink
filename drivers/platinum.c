@@ -19,66 +19,70 @@
 #include "driver.h"
 #include "device.h"
 #include "lowlevel/platinum.h"
-#include "print.h"
+#include "logic/print.h"
 #include "protocol/platinum.h"
+#include "unsupported.h"
 
-struct corsair_device_driver corsairlink_driver_platinum = {
+struct corsair_lowlevel_driver corsairlink_lowlevel_platinum = {
     .init = corsairlink_platinum_init,
     .deinit = corsairlink_platinum_deinit,
+    .read = corsairlink_platinum_read,
+    .write = corsairlink_platinum_write,
+};
+
+struct corsair_device_driver corsairlink_driver_platinum = {
     .name = corsairlink_platinum_name,
     .vendor = corsairlink_platinum_vendor,
     .product = corsairlink_platinum_product,
-    // .device_id = corsairlink_platinum_device_id,
-    // .fw_version = corsairlink_platinum_firmware_id,
-    .read = corsairlink_platinum_read,
-    .write = corsairlink_platinum_write,
+    .device_id = corsairlink_platinum_device_id,
+    .fw_version = corsairlink_platinum_firmware_id,
     .temperature =
         {
-            // .read = corsairlink_platinum_temperature,
-            // .count = corsairlink_platinum_tempsensorscount,
+            .read = corsairlink_platinum_temperature,
+            .count = corsairlink_platinum_tempsensorscount,
         },
     .led =
         {
-            // .static_color = corsairlink_platinum_change_led,
-            // .blink = corsairlink_unsupported_led,
-            // .color_pulse = corsairlink_unsupported_led,
-            // .color_shift = corsairlink_unsupported_led,
-            // .rainbow = corsairlink_unsupported_led,
-            // .temperature = corsairlink_unsupported_led,
+            .static_color = corsairlink_platinum_change_led,
+            .blink = corsairlink_unsupported_led,
+            .color_pulse = corsairlink_unsupported_led,
+            .color_shift = corsairlink_unsupported_led,
+            .rainbow = corsairlink_unsupported_led,
+            .temperature = corsairlink_unsupported_led,
         },
     .fan =
         {
-            // .count = corsairlink_platinum_fan_count,
+            .count = corsairlink_platinum_fan_count,
             .profile =
                 {
-                    // .read_profile = corsairlink_platinum_fan_mode_read,
+                    .read_profile = corsairlink_platinum_fan_mode_read,
                     .read_rpm = corsairlink_platinum_fan_mode_read_rpm,
-                    // .read_pwm = corsairlink_platinum_fan_mode_read_pwm,
-                    // .write_profile_custom = corsairlink_platinum_fan_mode_custom,
-                    // .write_profile_default = corsairlink_platinum_fan_mode_default,
-                    // .write_profile_performance = corsairlink_platinum_fan_mode_performance,
-                    // .write_profile_balanced = corsairlink_platinum_fan_mode_balanced,
-                    // .write_profile_quiet = corsairlink_platinum_fan_mode_quiet,
-                    // .write_rpm = corsairlink_platinum_fan_mode_rpm,
-                    // .write_pwm = corsairlink_platinum_fan_mode_pwm,
-                    // .write_custom_curve = corsairlink_platinum_fan_curve,
+                    .read_pwm = corsairlink_platinum_fan_mode_read_pwm,
+                    .write_profile_custom = corsairlink_platinum_fan_mode_custom,
+                    .write_profile_default = corsairlink_platinum_fan_mode_default,
+                    .write_profile_performance = corsairlink_platinum_fan_mode_performance,
+                    .write_profile_balanced = corsairlink_platinum_fan_mode_balanced,
+                    .write_profile_quiet = corsairlink_platinum_fan_mode_quiet,
+                    .write_rpm = corsairlink_platinum_fan_mode_rpm,
+                    .write_pwm = corsairlink_platinum_fan_mode_pwm,
+                    .write_custom_curve = corsairlink_platinum_fan_curve,
                 },
             .speed = corsairlink_platinum_fan_speed,
-            // .print_mode = corsairlink_platinum_fan_print_mode,
+            .print_mode = corsairlink_platinum_fan_print_mode,
         },
     .pump =
         {
             .profile =
                 {
-                    // .read_profile = corsairlink_platinum_pump_mode_read,
-                    // .write_profile_default = corsairlink_platinum_pump_mode_default,
-                    // .write_profile_performance = corsairlink_platinum_pump_mode_performance,
-                    // .write_profile_balanced = corsairlink_platinum_pump_mode_balanced,
-                    // .write_profile_quiet = corsairlink_platinum_pump_mode_quiet,
-                    // .write_profile_custom = corsairlink_platinum_pump_mode_custom,
-                    // .write_custom_curve = corsairlink_platinum_pump_curve,
+                    .read_profile = corsairlink_platinum_pump_mode_read,
+                    .write_profile_default = corsairlink_platinum_pump_mode_default,
+                    .write_profile_performance = corsairlink_platinum_pump_mode_performance,
+                    .write_profile_balanced = corsairlink_platinum_pump_mode_balanced,
+                    .write_profile_quiet = corsairlink_platinum_pump_mode_quiet,
+                    .write_profile_custom = corsairlink_platinum_pump_mode_custom,
+                    .write_custom_curve = corsairlink_platinum_pump_curve,
                 },
-            // .profile = corsairlink_platinum_pump_mode,
+            .profile = corsairlink_platinum_pump_mode,
             .speed = corsairlink_platinum_pump_speed,
         },
 };

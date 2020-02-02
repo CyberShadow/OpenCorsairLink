@@ -19,7 +19,8 @@
 #include "device.h"
 #include "driver.h"
 #include "lowlevel/platinum.h"
-#include "print.h"
+#include "logic/print.h"
+#include "logic/options.h"
 #include "protocol/platinum.h"
 
 #include <errno.h>
@@ -55,8 +56,8 @@ corsairlink_platinum_pump_mode(
 
     commands[0] = ii;
 
-    rr = dev->driver->write( handle, dev->write_endpoint, commands, 64 );
-    rr = dev->driver->read( handle, dev->read_endpoint, response, 64 );
+    rr = dev->lowlevel->write( handle, dev->write_endpoint, commands, 64 );
+    rr = dev->lowlevel->read( handle, dev->read_endpoint, response, 64 );
 
     ctrl->mode = response[4];
 
@@ -89,8 +90,8 @@ corsairlink_platinum_pump_mode_read(
 
     commands[0] = ii;
 
-    rr = dev->driver->write( handle, dev->write_endpoint, commands, 64 );
-    rr = dev->driver->read( handle, dev->read_endpoint, response, 64 );
+    rr = dev->lowlevel->write( handle, dev->write_endpoint, commands, 64 );
+    rr = dev->lowlevel->read( handle, dev->read_endpoint, response, 64 );
 
     ctrl->mode = response[4];
 
@@ -192,8 +193,8 @@ corsairlink_platinum_pump_curve(
     commands[0x00] = ctrl->table[4].speed;
     commands[0x00] = 0x00;
 
-    rr = dev->driver->write( handle, dev->write_endpoint, commands, 64 );
-    rr = dev->driver->read( handle, dev->read_endpoint, response, 64 );
+    rr = dev->lowlevel->write( handle, dev->write_endpoint, commands, 64 );
+    rr = dev->lowlevel->read( handle, dev->read_endpoint, response, 64 );
 
     return rr;
 }
@@ -218,8 +219,8 @@ corsairlink_platinum_pump_speed(
     commands[0x3F] = 0x00;
     commands[0x40] = 0xFF;
 
-    rr = dev->driver->write( handle, dev->write_endpoint, commands, 64 );
-    rr = dev->driver->read( handle, dev->read_endpoint, response, 64 );
+    rr = dev->lowlevel->write( handle, dev->write_endpoint, commands, 64 );
+    rr = dev->lowlevel->read( handle, dev->read_endpoint, response, 64 );
 
     msg_debug2( "Speed: %02X %02X\n", response[0x1D], response[0x1E] );
     msg_debug2( "Max Speed: %02X %02X\n", response[9], response[8] );

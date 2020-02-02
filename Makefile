@@ -52,6 +52,7 @@ MAINLOGIC_SOURCE := \
 	logic/settings/hydro_asetek.c \
 	logic/settings/hydro_asetekpro.c \
 	logic/settings/hydro_coolit.c \
+	logic/settings/hydro_platinum.c \
 	logic/settings/psu.c
 
 DRIVER_SOURCE := \
@@ -61,6 +62,7 @@ DRIVER_SOURCE := \
 	drivers/coolit_old.c \
 	drivers/coolit.c \
 	drivers/dongle.c \
+	drivers/platinum.c \
 	drivers/rmi.c \
 	drivers/unsupported.c
 
