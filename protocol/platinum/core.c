@@ -85,18 +85,16 @@ corsairlink_platinum_firmware_id(
 
     uint8_t ii = 0;
 
-    commands[0x00] = 0x3F;
-    commands[0x01] = CommandId++; // Command ID
-    commands[0x02] = 0xFF; // Command Opcode
-    commands[0x40] = 0xD8; // CRC ??
-    // commands[0] = ii; // Length
+    commands[0] = sizeof(commands) - 1; // Length
+    commands[++ii] = CommandId++; // Command ID
+    commands[++ii] = 0xFF; // Command Opcode
 
     rr = dev->lowlevel->write( handle, dev->write_endpoint, commands, 64 );
     rr = dev->lowlevel->read( handle, dev->read_endpoint, response, 64 );
 
     snprintf(
-        firmware, firmware_size, "%d.%d.%d", ( response[3] & 240 ) >> 4, ( response[3] & 15 ),
-        response[2] );
+        firmware, firmware_size, "%d.%d.%d", ( response[2] & 0xf0 ) >> 4, ( response[2] & 0xf ),
+        response[3] );
 
     return 0;
 }
